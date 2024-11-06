@@ -7,7 +7,9 @@ const routes = [
         { path: '/EventsPage', component: () => import('pages/EventsPage.vue') },
         { path: '/ProfilPage', component: () => import('pages/ProfilPage.vue') },
         { path: '/HomePage', component: () => import('pages/HomePage.vue') },
-        { path: '/QutesPage', component: () => import('pages/QutesPage.vue') }
+        { path: '/QutesPage', component: () => import('pages/QutesPage.vue') },
+        { path: '/CreateAccount', component: () => import('pages/CreateAccount.vue')},
+        { path: '/ProfilOrganizacije', component: () => import('pages/OrgProfile.vue')}
       ]
     },
   
