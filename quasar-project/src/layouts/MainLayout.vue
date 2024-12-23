@@ -2,40 +2,18 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title class="nav-title"> HRKrist </q-toolbar-title>
+        <img alt="HRKrist logo" src="./../assets/logo.jpg" class="logo" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="drawer">
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <q-item-label header> {{ $t("home") }} </q-item-label>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" target="_self" />
       </q-list>
     </q-drawer>
 
@@ -47,56 +25,122 @@
 
 <script setup>
 import { ref } from 'vue'
+//import { computed } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue'
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: t("home"),
+    icon: 'home',
+    link: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: t("random"),
+    icon: 'shuffle',
+    link: '/#/random',
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    title: t("contact"),
+    icon: 'contact_mail',
+    link: '/#/contact',
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    title: t("settings"),
+    icon: 'settings',
+    link: '/#/settings',
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    title: t("login"),
+    icon: 'login',
+    link: '/#/login',
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
+    title: t("register"),
+    icon: 'person_add',
+    link: '/#/register',
   },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-]
+];
 
 const leftDrawerOpen = ref(false)
 
-function toggleLeftDrawer () {
+function toggleLeftDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value
 }
 </script>
+
+<script>
+import { Notify } from "quasar";
+
+export default {
+  name: "MainLayout",
+  data() {
+    return {
+      isOnline: navigator.onLine, // Početni status mreže
+    };
+  },
+  mounted() {
+    // Postavljanje event listenera za promjenu mrežnog statusa
+    window.addEventListener("online", this.handleNetworkChange);
+    window.addEventListener("offline", this.handleNetworkChange);
+
+    // Prikazujemo početni status mreže kao notifikaciju
+    this.notifyNetworkStatus();
+  },
+  beforeUnmount() {
+    // Uklanjamo event listenere kad komponenta nije prikazana
+    window.removeEventListener("online", this.handleNetworkChange);
+    window.removeEventListener("offline", this.handleNetworkChange);
+  },
+  methods: {
+    handleNetworkChange() {
+      // Ažuriranje statusa mreže i prikazivanje obavijesti
+      this.isOnline = navigator.onLine;
+      this.notifyNetworkStatus();
+    },
+    notifyNetworkStatus() {
+      if (this.isOnline) {
+        // Prikazuje notifikaciju za ponovno uspostavljenu vezu
+        Notify.create({
+          type: "positive",
+          message: "Internet connection retrieved.",
+          icon: "wifi",
+          timeout: 2000, // Notifikacija nestaje nakon 2 sekunde
+        });
+      } else {
+        // Prikazuje notifikaciju za gubitak veze
+        Notify.create({
+          type: "negative",
+          message: "Internet connection lost.",
+          icon: "wifi_off",
+          timeout: 0, // Notifikacija ostaje dok korisnik ponovno ne bude online
+          actions: [{ label: "OK", color: "white" }],
+        });
+      }
+    },
+  },
+};
+</script>
+
+<style>
+body {
+  background-color: #f0f0f0;
+}
+
+.q-drawer__content {
+  background-color: #e0e0e0;
+}
+.nav-title {
+  font-size: 5vw;
+  font-weight: bold;
+}
+
+.logo {
+  width: 10%; /* Set width as a percentage of its container */
+  height: auto; /* Maintain the aspect ratio */
+  max-width: 300px; /* Optional: limit the maximum width */
+}
+</style>
+
