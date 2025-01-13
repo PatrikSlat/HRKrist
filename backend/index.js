@@ -5,6 +5,21 @@ const PORT = process.env.PORT || 3030;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const axios = require("axios");
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host     : 'ucka.veleri.hr',
+  user     : 'fkrstic',
+  password : '11',
+  database : 'fkrstic'
+});
+ 
+connection.connect((err) => {
+    if (err){
+        console.log("Error occurred while connecting to DB: ", err.stack);
+    }
+    console.log("Connected to Database")
+});
 
 
 app.use(bodyParser.json());

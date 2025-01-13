@@ -40,7 +40,7 @@ const i18n = createI18n({
   legacy: false,
   locale: 'hr',   // DEFAULT LANGUAGE
   messages,
-  //admin stranica s popisom volontera, popis dogadaja, 
+  //admin stranica s popisom volontera, popis dogadaja,
 });
 
 export default ({ app }) => {
