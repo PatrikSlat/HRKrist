@@ -20,6 +20,14 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer class="bg-primary text-white">
+      <div class="q-px-md">
+        <span>&copy; 2025 HRKrsit. Sva prava pridržana.</span>
+        <q-btn flat dense label="Pravila privatnosti" to="/privacy" />
+        <q-btn flat dense label="Uvjeti korištenja" to="/terms" />
+      </div>
+    </q-footer>
   </q-layout>
 </template>
 
@@ -41,6 +49,11 @@ const linksList = [
     title: t("random"),
     icon: 'shuffle',
     link: '/#/random',
+  },
+  {
+    title: t("help"),
+    icon: 'volunteer_activism',
+    link: '/#/volunteer',
   },
   {
     title: t("contact"),

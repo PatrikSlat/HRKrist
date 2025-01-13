@@ -6,6 +6,7 @@ const messages = {
     home: "Naslovnica",
     about: "O nama",
     random: "Nasumično",
+    help: "Volontiranje",
     name: "HRKrist",
     contact: "Kontakt",
     login: "Prijava",
@@ -21,6 +22,7 @@ const messages = {
     about: "About Us",
     name: "HRKrist",
     random: "Random",
+    help: "Volunteering",
     login: "Login",
     register: "Register",
     contact: "Contact",
@@ -38,6 +40,7 @@ const i18n = createI18n({
   legacy: false,
   locale: 'hr',   // DEFAULT LANGUAGE
   messages,
+  //admin stranica s popisom volontera, popis dogadaja, 
 });
 
 export default ({ app }) => {
