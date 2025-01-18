@@ -1,3 +1,4 @@
+import { boot } from 'quasar/wrappers';
 import { createI18n } from 'vue-i18n';
 
 
@@ -35,14 +36,17 @@ const messages = {
 };
 
 
-//I18N INSTANCA
+const savedLocale = localStorage.getItem('locale') || 'hr';
+
 const i18n = createI18n({
   legacy: false,
-  locale: 'hr',   // DEFAULT LANGUAGE
+  globalInjection: true,
+  locale: savedLocale,
   messages,
-  //admin stranica s popisom volontera, popis dogadaja,
 });
 
-export default ({ app }) => {
+export default boot(({ app }) => {
   app.use(i18n);
-};
+});
+
+export { i18n };
