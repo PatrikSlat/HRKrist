@@ -138,22 +138,17 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #f0f0f0;
-}
-
-.q-drawer__content {
-  background-color: #e0e0e0;
-}
 .nav-title {
   font-size: 5vw;
   font-weight: bold;
 }
 
 .logo {
-  width: 10%; /* Set width as a percentage of its container */
-  height: auto; /* Maintain the aspect ratio */
-  max-width: 300px; /* Optional: limit the maximum width */
+  width: 10%;
+  /* Set width as a percentage of its container */
+  height: auto;
+  /* Maintain the aspect ratio */
+  max-width: 300px;
+  /* Optional: limit the maximum width */
 }
 </style>
-
