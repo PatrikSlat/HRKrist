@@ -10,6 +10,7 @@ const routes = [
       { path: 'register', component: () => import('pages/RegistrationPage.vue') },
       { path: 'random', component: () => import('pages/RandomPage.vue') },
       { path: 'volunteer', component: () => import('pages/VolunteeringPage.vue') },
+      { path: 'admin', component: () => import('pages/AdminPage.vue') },
     ],
   },
 

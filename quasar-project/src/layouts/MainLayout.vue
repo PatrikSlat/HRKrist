@@ -90,6 +90,11 @@ const linksList = computed(() => [
     icon: "person_add",
     link: "/#/register",
   },
+  {
+    title: "Admin",
+    icon: "admin_panel_settings",
+    link: "/#/admin",
+  },
 ]);
 </script>
 
