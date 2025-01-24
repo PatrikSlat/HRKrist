@@ -1,6 +1,7 @@
 <template>
   <q-page padding>
     <q-page-container>
+      <!-- Kontakt Banner -->
       <q-banner dense class="q-mb-md bg-secondary text-white">
         <template v-slot:avatar>
           <q-icon name="contact_support" color="white" />
@@ -11,7 +12,7 @@
         </div>
       </q-banner>
 
-
+      <!-- Kontakt informacije -->
       <q-card bordered class="q-mb-md">
         <q-card-section>
           <div class="text-h5 text-primary">Kontakt informacije</div>
@@ -20,13 +21,21 @@
         </q-card-section>
       </q-card>
 
+      <!-- Kontakt forma -->
       <q-form class="q-mb-md">
         <q-card bordered>
           <q-card-section>
             <div class="text-h5 text-primary">Pošaljite nam poruku</div>
-            <q-input filled v-model="name" label="Ime" class="q-mb-sm" />
-            <q-input filled v-model="email" label="Email" class="q-mb-sm" />
-            <q-input filled v-model="message" type="textarea" label="Poruka" />
+            <q-input filled v-model="name" label="Ime" class="q-mb-sm" required />
+            <q-input
+              filled
+              v-model="email"
+              label="Email"
+              type="email"
+              class="q-mb-sm"
+              required
+            />
+            <q-input filled v-model="message" type="textarea" label="Poruka" required />
           </q-card-section>
           <q-card-actions>
             <q-btn label="Pošalji" color="primary" @click="sendMessage" />
@@ -48,15 +57,43 @@ export default {
     };
   },
   methods: {
-    sendMessage() {
+    async sendMessage() {
       if (this.name && this.email && this.message) {
-        this.$q.notify({
-          type: "positive",
-          message: "Poruka je uspješno poslana!",
-        });
-        this.name = "";
-        this.email = "";
-        this.message = "";
+        try {
+          // Slanje podataka na backend
+          const response = await fetch("http://localhost:3000/api/send-email", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: this.name,
+              email: this.email,
+              message: this.message,
+            }),
+          });
+
+          if (response.ok) {
+            this.$q.notify({
+              type: "positive",
+              message: "Poruka je uspješno poslana!",
+            });
+            this.name = "";
+            this.email = "";
+            this.message = "";
+          } else {
+            this.$q.notify({
+              type: "negative",
+              message: "Došlo je do greške prilikom slanja poruke.",
+            });
+          }
+        } catch (error) {
+          console.error(error);
+          this.$q.notify({
+            type: "negative",
+            message: "Došlo je do greške prilikom komunikacije sa serverom.",
+          });
+        }
       } else {
         this.$q.notify({
           type: "negative",

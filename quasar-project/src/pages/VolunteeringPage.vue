@@ -14,17 +14,22 @@
       <q-card bordered class="q-mb-md">
         <q-card-section>
           <div class="text-h5 text-primary">Zašto volontirati?</div>
-          <p>Volontiranje nije samo pomaganje drugima, već i prilika za osobni rast, upoznavanje novih ljudi i jačanje zajednice.</p>
+          <p>
+            Volontiranje nije samo pomaganje drugima, već i prilika za osobni rast,
+            upoznavanje novih ljudi i jačanje zajednice.
+          </p>
         </q-card-section>
       </q-card>
 
       <q-card bordered class="q-mb-md">
         <q-card-section>
           <div class="text-h5 text-primary">Kako se uključiti?</div>
-          <p>Pridruži se jednostavno putem naših online prijavnica ili posjeti naš ured.</p>
+          <p>
+            Pridruži se jednostavno putem naših online prijavnica ili posjeti naš ured.
+          </p>
         </q-card-section>
         <q-card-actions>
-          <q-btn label="Prijavi se" color="primary" to="/signup" />
+          <q-btn label="Prijavi se" color="primary" to="/register" />
           <q-btn label="Kontaktiraj nas" flat to="/contact" />
         </q-card-actions>
       </q-card>
