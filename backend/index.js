@@ -66,6 +66,25 @@ app.post("/api/send-email", async (req, res) => {
     }
 });
 
+//DB routes
+app.post("/api/db/register", (req, res) => {
+    const { email, password, username } = req.body;
+
+    if (!email || !password || !username) {
+      return res.status(400).send("All fields (email, password, userName) are required.");
+    }
+
+    const query = "INSERT INTO user (email, password, userName) VALUES (?, ?, ?)";
+    connection.query(query, [email, password, username], (err, results) => {
+      if (err) {
+        console.error("Error adding user to database:", err);
+        return res.status(500).send("Internal Server Error: Could not register user.");
+      } else {
+        console.log("User added successfully:", results);
+        return res.status(200).send("User registered successfully!");
+      }
+    });
+  });
 
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);

@@ -11,7 +11,13 @@
 
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="drawer">
       <q-list>
-        <q-item v-for="link in linksList" :key="link.title" clickable tag="a" :href="link.link">
+        <q-item
+          v-for="link in linksList"
+          :key="link.title"
+          clickable
+          tag="a"
+          :href="link.link"
+        >
           <q-item-section avatar>
             <q-icon :name="link.icon" />
           </q-item-section>
@@ -37,8 +43,8 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, computed } from "vue";
+import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 
 const leftDrawerOpen = ref(false);
@@ -91,6 +97,10 @@ const linksList = computed(() => [
 .nav-title {
   font-size: 5vw;
   font-weight: bold;
+}
+
+.q-btn {
+  transition: all 0.3s ease-in-out;
 }
 
 .logo {
