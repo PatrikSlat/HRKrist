@@ -110,6 +110,24 @@ app.post("/api/db/admin", (req, res) => {
     });
   });
 
+//CHURCHES 
+app.get('/api/db/churches', (req, res) => {
+    const { zupanija } = req.query; 
+  
+    let query = 'SELECT * FROM crkva';
+    if (zupanija) {
+      query += ` WHERE zupanija = '${zupanija}'`;
+    }
+  
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.error('Error fetching churches:', err);
+        return res.status(500).json({ error: 'Internal Server Error' });
+      }
+      res.json(results);
+    });
+  });
+
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
 });
