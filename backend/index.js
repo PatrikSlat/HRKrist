@@ -1,14 +1,13 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const mysql = require("mysql");
 const nodemailer = require("nodemailer");
 
-// Database connection
 const connection = mysql.createConnection({
     host: "ucka.veleri.hr",
     user: "fkrstic",
@@ -23,11 +22,10 @@ connection.connect((err) => {
     console.log("Connected to Database");
 });
 
-// Middleware
+
 app.use(bodyParser.json());
 app.use(cors({ origin: "*" }));
 
-// Test route
 app.get("/api/random/test", async (req, res) => {
     try {
         const response = await axios.get("https://bible-api.com/data/web/random");
@@ -40,7 +38,7 @@ app.get("/api/random/test", async (req, res) => {
     }
 });
 
-// Email configuration
+
 app.post("/api/send-email", async (req, res) => {
     const { email, message } = req.body;
 
@@ -68,7 +66,7 @@ app.post("/api/send-email", async (req, res) => {
     }
 });
 
-// Register route
+
 app.post("/api/db/register", (req, res) => {
     const { email, password, username } = req.body;
 
@@ -88,7 +86,7 @@ app.post("/api/db/register", (req, res) => {
     });
 });
 
-// Login route
+
 app.post("/api/db/login", (req, res) => {
     const { email, password } = req.body;
 
@@ -104,16 +102,16 @@ app.post("/api/db/login", (req, res) => {
         }
 
         if (results.length === 0) {
-            // No user found with the provided email and password
+
             return res.status(401).json({ success: false, message: "Invalid email or password." });
         }
 
-        // User found, login successful
+
         return res.status(200).json({ success: true, message: "Login successful!" });
     });
 });
 
-// Start the server
+
 app.listen(PORT, () => {
     console.log(`Server listening at http://localhost:${PORT}`);
 });
