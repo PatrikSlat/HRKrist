@@ -11,6 +11,9 @@ const routes = [
       { path: 'random', component: () => import('pages/RandomPage.vue') },
       { path: 'volunteer', component: () => import('pages/VolunteeringPage.vue') },
       { path: 'admin', component: () => import('pages/AdminPage.vue') },
+      { path: 'chruches', component: () => import('pages/ChurchesPage.vue') },
+      { path: 'prayer', component: () => import('pages/PrayerPage.vue') },
+      { path: 'intention', component: () => import('pages/PrayerIntentionPage.vue') },
     ],
   },
 
