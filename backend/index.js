@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express"); // Corrected typo
 const app = express();
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const axios = require("axios");
@@ -82,6 +82,30 @@ app.post("/api/db/register", (req, res) => {
       } else {
         console.log("User added successfully:", results);
         return res.status(200).send("User registered successfully!");
+      }
+    });
+  });
+
+
+// Admin login route
+app.post("/api/db/admin", (req, res) => {
+    const { username, password } = req.body;
+  
+    if (!username || !password) {
+      return res.status(400).json({ success: false, message: "Username and password are required." });
+    }
+  
+    const query = "SELECT * FROM admin WHERE username = ? AND password = ?";
+    connection.query(query, [username, password], (err, results) => {
+      if (err) {
+        console.error("Error querying database:", err);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+      }
+  
+      if (results.length > 0) {
+        return res.json({ success: true, message: "Login successful" });
+      } else {
+        return res.status(401).json({ success: false, message: "Invalid username or password" });
       }
     });
   });
