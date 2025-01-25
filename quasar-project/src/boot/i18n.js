@@ -17,6 +17,9 @@ const messages = {
     darkMode: "Tamna tema",
     language: "Jezik",
     settingsPage: "Postavke",
+    prayer: "Molitvneni Podjsetnik",
+    intention: "Molitvena Nakana",
+    churches: "Crkve"
   },
   en: {
     home: "Homepage",
@@ -32,6 +35,9 @@ const messages = {
     darkMode: "Dark Mode",
     language: "Language",
     settingsPage: "Settings",
+    prayer: "Prayer Reminder",
+    intention: "Prayer Intention",
+    churches: "Churches"
   },
 };
 

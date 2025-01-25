@@ -7,4 +7,7 @@ export default {
   darkMode: "Tamna tema",
   language: "Jezik",
   settingsPage: "Postavke",
+  prayer: "Molitvneni podjsetnik",
+  intention: "Molitvena nakana",
+  churches: "Crkve"
 };

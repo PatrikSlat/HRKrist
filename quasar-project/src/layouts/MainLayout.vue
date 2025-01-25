@@ -71,6 +71,21 @@ const linksList = computed(() => [
     link: "/#/volunteer",
   },
   {
+    title: t("prayer"),
+    icon: "volunteer_activism",
+    link: "/#/prayer",
+  },
+  {
+    title: t("intention"),
+    icon: "volunteer_activism",
+    link: "/#/intention",
+  },
+  {
+    title: t("churches"),
+    icon: "church",
+    link: "/#/churches",
+  },
+  {
     title: t("contact"),
     icon: "contact_mail",
     link: "/#/contact",

@@ -7,4 +7,7 @@ export default {
   darkMode: "Dark Mode",
   language: "Language",
   settingsPage: "Settings",
+  prayer: "Prayer Reminder",
+  intention: "Prayer Intention",
+  churches: "Churches"
 };
