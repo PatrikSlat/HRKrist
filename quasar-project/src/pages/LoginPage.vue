@@ -22,5 +22,9 @@
 </template>
 
 <script setup>
-//
+import { ref } from 'vue';
+
+// Define reactive state for email and password
+const email = ref('');
+const password = ref('');
 </script>
