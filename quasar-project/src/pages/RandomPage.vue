@@ -6,26 +6,25 @@
         <div class="text-subtitle1 text-grey-7 q-mt-sm">
           {{ bookName }} {{ chapter }}:{{ verse }}
         </div>
-
       </q-card-section>
+      <a href="https://biblija.ks.hr/">Read the Bible online</a>
     </q-card>
   </q-page>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
+import { ref, onMounted } from "vue";
+import axios from "axios";
 
 // Refs for API data
-const verseText = ref('');
-const bookName = ref('');
-const chapter = ref('');
-const verse = ref('');
-
+const verseText = ref("");
+const bookName = ref("");
+const chapter = ref("");
+const verse = ref("");
 
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/api/random/test');
+    const response = await axios.get("http://localhost:3000/api/random/test");
     const { random_verse } = response.data;
 
     // Set data from the API
@@ -34,7 +33,7 @@ onMounted(async () => {
     chapter.value = random_verse.chapter;
     verse.value = random_verse.verse;
   } catch (error) {
-    console.error('Error fetching verse:', error);
+    console.error("Error fetching verse:", error);
   }
 });
 </script>
