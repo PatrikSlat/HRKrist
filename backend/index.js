@@ -150,6 +150,7 @@ app.get('/api/db/churches', (req, res) => {
         console.error('Error fetching churches:', err);
         return res.status(500).json({ error: 'Internal Server Error' });
       }
+      console.log(results)
       res.json(results);
     });
   });
